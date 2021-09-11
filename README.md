@@ -30,7 +30,7 @@ Build AOSP or CustomROM With Docker technology
 
 5. Start Docker and map the working directory.
    ```
-   docker run -it --rm -v $ANDROID_BUILD_TOP:/android android-build-host
+   docker run -it --rm -v $DOCKER_WORKING_DIRECTORY:/android android-build-host
    ```
 
 6. Init repo (e.g. PixelExperience 11 Plus)
