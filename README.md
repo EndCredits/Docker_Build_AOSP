@@ -20,10 +20,7 @@ Build AOSP or CustomROM With Docker technology
 
 3. Build docker image.
    ```
-   docker build --build-arg userid=$(id -u) \
-   --build-arg groupid=$(id -g) \
-   --build-arg username=$(id -un) \ 
-   -t android-build-host .
+   docker build --build-arg userid=$(id -u) --build-arg groupid=$(id -g) --build-arg username=$(id -un) -t android-build-host .
    ```
 
 4. Set Android Build working directory.
