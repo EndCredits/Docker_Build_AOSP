@@ -1,4 +1,6 @@
 FROM ubuntu:20.04
+ARG DEBIAN_FRONTEND=noninteractive
+ARG TZ=Asia/Shanghai
 ARG userid
 ARG groupid
 ARG username
