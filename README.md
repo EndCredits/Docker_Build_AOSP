@@ -22,10 +22,22 @@ Build AOSP or CustomROM With Docker technology
    ```
    docker build --build-arg userid=$(id -u) --build-arg groupid=$(id -g) --build-arg username=$(id -un) -t android-build-host .
    ```
+   
+   If you are using fish
+   
+   ```
+   docker build --build-arg userid=(id -u) --build-arg groupid=(id -g) --build-arg username=(id -un) -t android-build-host .
+   ```
 
 4. Set Android Build working directory.
    ```
    export DOCKER_WORKING_DIRECTORY=<path to your android os source tree>
+   ```
+   
+   If you are using fish
+   
+   ```
+   set DOCKER_WORKING_DIRECTORY <path to your android os source tree>
    ```
 
 5. Start Docker and map the working directory.
