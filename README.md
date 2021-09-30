@@ -72,28 +72,3 @@ Build AOSP or CustomROM With Docker technology
 
 ## Credits
  - [Git At Google](https://android.googlesource.com/platform/build/+/master/tools/docker)
-
----
-
-## Troubleshooting
-
-1. "groupadd: GID '100' already exists"
-   
-   This is caused by there is a group with gid 100 in your system. So just delete this in Dockerfile like this.
-
-   before:
-
-   ```
-   RUN groupadd -g $groupid $username \
-    && useradd -m -u $userid -g $groupid $username \
-    && echo $username >/root/username \
-    && echo "export USER="$username >>/home/$username/.gitconfig
-   ```
-
-   after:
-
-   ```
-   RUN useradd -m -u $userid -g $groupid $username \
-    && echo $username >/root/username \
-    && echo "export USER="$username >>/home/$username/.gitconfig
-   ```
