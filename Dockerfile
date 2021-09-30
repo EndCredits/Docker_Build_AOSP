@@ -12,7 +12,7 @@ RUN ln -s /usr/bin/python3 /usr/bin/python
 RUN curl -o /usr/local/bin/repo https://mirrors.tuna.tsinghua.edu.cn/git/git-repo \
  && chmod a+x /usr/local/bin/repo
 
-RUN groupadd -g $groupid $username \
+RUN groupadd -o -g $groupid $username \
  && useradd -m -u $userid -g $groupid $username \
  && echo $username >/root/username \
  && echo "export USER="$username >>/home/$username/.gitconfig
