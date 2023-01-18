@@ -11,6 +11,9 @@ RUN apt-get update && apt-get install -y git-core gnupg flex bison build-essenti
 
 RUN apt-get update && apt-get install -y bc bison build-essential ccache curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev
 
+RUN apt-get -y install sudo \
+    && echo "${username} ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers
+
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
 RUN curl -o /usr/local/bin/repo https://mirrors.tuna.tsinghua.edu.cn/git/git-repo \
