@@ -28,6 +28,13 @@ Build AOSP or CustomROM With Docker technology
    ```
    docker build --build-arg userid=(id -u) --build-arg groupid=(id -g) --build-arg username=(id -un) -t android-build-host .
    ```
+   
+   Note that if you are using proxy tools like v2raya you may need enable ```host``` network mode by appending ```--network host``` in build command like:
+
+   ```
+   docker build --build-arg userid=$(id -u) --build-arg groupid=$(id -g) --build-arg username=$(id -un) -t android-build-host --network host .
+
+   ```
 
 4. Set Android Build working directory.
    ```
