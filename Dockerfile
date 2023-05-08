@@ -14,6 +14,8 @@ RUN apt-get update && apt-get install -y bc bison build-essential ccache curl fl
 RUN apt-get -y install sudo \
     && echo "${username} ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers
 
+RUN apt-get update && apt-get -y install python2 cpio
+
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
 RUN curl -o /usr/local/bin/repo https://mirrors.tuna.tsinghua.edu.cn/git/git-repo \
