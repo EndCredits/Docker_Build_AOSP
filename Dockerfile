@@ -21,7 +21,7 @@ RUN ln -s /usr/bin/python3 /usr/bin/python
 RUN curl -o /usr/local/bin/repo https://mirrors.tuna.tsinghua.edu.cn/git/git-repo \
  && chmod a+x /usr/local/bin/repo
 
-RUN apt-get -y install vim dos2unix
+RUN apt-get -y install vim dos2unix fish
 
 RUN groupadd -o -g $groupid $username \
  && useradd -m -u $userid -g $groupid $username \
@@ -33,4 +33,4 @@ RUN chown $userid:$groupid /home/$username/.gitconfig
 ENV HOME=/home/$username
 ENV USER=$username
 
-ENTRYPOINT chroot --userspec=$(cat /root/username):$(cat /root/username) / /bin/bash -i
+ENTRYPOINT chroot --userspec=$(cat /root/username):$(cat /root/username) / /usr/bin/fish -i
