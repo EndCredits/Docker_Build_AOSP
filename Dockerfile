@@ -7,26 +7,37 @@ ARG username
 ENV TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN apt-get update && apt-get install -y git-core gnupg flex bison build-essential zip curl zlib1g-dev gcc-multilib g++-multilib libc6-dev-i386 libncurses5 lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z1-dev libgl1-mesa-dev libxml2-utils xsltproc unzip fontconfig
+# Force apt ipv4
+RUN echo 'Acquire::ForceIPv4 "True";' > /etc/apt/apt.conf.d/99-force-ipv4
 
-RUN apt-get update && apt-get install -y bc bison build-essential ccache curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev
+RUN apt-get update \
+    && apt-get install -y bc bison build-essential ccache curl flex fontconfig \
+                          gcc-multilib git g++-multilib gnupg gperf imagemagick \
+                          lib32ncurses5-dev lib32readline-dev lib32z1-dev libc6-dev-i386 \
+                          libgl1-mesa-dev liblz4-tool libncurses5 libncurses5-dev \
+                          libx11-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils \
+                          unzip x11proto-core-dev lzop pngcrush python3-sepolgen rsync \
+                          schedtool squashfs-tools xsltproc zip zlib1g-dev cpio vim \
+                          dos2unix fish locales sudo
 
-RUN apt-get -y install sudo \
-    && echo "${username} ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers
-
-RUN apt-get update && apt-get -y install cpio
+RUN echo "${username} ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
 RUN curl -o /usr/local/bin/repo https://mirrors.tuna.tsinghua.edu.cn/git/git-repo \
- && chmod a+x /usr/local/bin/repo
+    && chmod a+x /usr/local/bin/repo
 
-RUN apt-get -y install vim dos2unix fish
+RUN dpkg-reconfigure locales \
+    && locale-gen C.UTF-8 \
+    && /usr/sbin/update-locale LANG=C.UTF-8 
+
+RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen \
+    && locale-gen
 
 RUN groupadd -o -g $groupid $username \
- && useradd -m -u $userid -g $groupid $username \
- && echo $username >/root/username \
- && echo "export USER="$username >>/home/$username/.gitconfig
+    && useradd -m -u $userid -g $groupid $username \
+    && echo $username >/root/username \
+    && echo "export USER="$username >>/home/$username/.gitconfig
 
 COPY gitconfig /home/$username/.gitconfig
 RUN chown $userid:$groupid /home/$username/.gitconfig
