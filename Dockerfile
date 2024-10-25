@@ -29,7 +29,7 @@ RUN curl -o /usr/local/bin/repo https://mirrors.tuna.tsinghua.edu.cn/git/git-rep
 
 RUN dpkg-reconfigure locales \
     && locale-gen C.UTF-8 \
-    && /usr/sbin/update-locale LANG=C.UTF-8 
+    && /usr/sbin/update-locale LANG=C.UTF-8
 
 RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen \
     && locale-gen
