@@ -18,7 +18,8 @@ RUN apt-get update \
                           libx11-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils \
                           unzip x11proto-core-dev lzop pngcrush python3-sepolgen rsync \
                           schedtool squashfs-tools xsltproc zip zlib1g-dev cpio vim \
-                          dos2unix fish locales sudo patchelf git-lfs libelf-dev elfutils
+                          dos2unix fish locales sudo patchelf git-lfs libelf-dev elfutils \
+                          dwarves
 
 RUN echo "${username} ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers
 
