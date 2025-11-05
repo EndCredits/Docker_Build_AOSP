@@ -19,6 +19,9 @@ RUN apt-get update \
                           dos2unix fish locales sudo patchelf git-lfs libelf-dev elfutils \
                           dwarves erofs-utils
 
+RUN apt update \
+    && apt install wget 7zip
+
 RUN echo "${username} ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 RUN ln -s /usr/bin/python3 /usr/bin/python
