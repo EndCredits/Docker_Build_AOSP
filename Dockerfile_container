@@ -1,4 +1,4 @@
-FROM debian:bookworm
+FROM debian:trixie
 ARG DEBIAN_FRONTEND=noninteractive
 ARG userid
 ARG groupid
@@ -8,11 +8,11 @@ ENV TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Force apt ipv4
-RUN echo 'Acquire::ForceIPv4 "True";' > /etc/apt/apt.conf.d/99-force-ipv4
+# RUN echo 'Acquire::ForceIPv4 "True";' > /etc/apt/apt.conf.d/99-force-ipv4
 
 RUN apt-get update \
     && apt-get install -y bc bison build-essential ccache curl flex fontconfig git gnupg gperf imagemagick \
-                          libgl1-mesa-dev liblz4-tool libncurses5 libncurses5-dev \
+                          libgl1-mesa-dev lz4 libncurses6 \
                           libx11-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils \
                           unzip x11proto-core-dev lzop pngcrush python3-sepolgen rsync \
                           schedtool squashfs-tools xsltproc zip zlib1g-dev cpio vim \
@@ -20,7 +20,7 @@ RUN apt-get update \
                           dwarves erofs-utils
 
 RUN apt update \
-    && apt install wget 7zip
+    && apt install -y wget 7zip openjdk-21-jdk
 
 RUN echo "${username} ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers
 
